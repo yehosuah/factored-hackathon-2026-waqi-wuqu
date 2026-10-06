@@ -66,6 +66,7 @@ Instead, the application separates language understanding from deterministic exe
 8. Unsupported, ambiguous, or human-requested cases are escalated instead of guessed.
 
 Explicit requests for a human agent use a deterministic handoff API and do not depend on intent classification.
+
 ## Source in this repository
 
 One clone includes the actual component code, tests, dependency locks, build files,
@@ -74,8 +75,8 @@ and documentation:
 | Directory | Source revision | Files |
 | --- | --- | ---: |
 | [etl/](etl/) | `c222173ee03df46be914cbfacfb097823f6a7196` | 114 |
-| [backend/](backend/) | `1e0321dc2c01ad5b4834183466b43f4563be18e4` | 100 |
-| [frontend/](frontend/) | `15c50c903073a437ec7af3130311a9dec33c1605` | 43 |
+| [backend/](backend/) | `3a087a3100f8b7f4cfc1a61a95277fd13bf44612` | 100 |
+| [frontend/](frontend/) | `8ab2eb5e0363046150c49e8b290bebd2d47d81f5` | 43 |
 
 [source-manifest.json](source-manifest.json) records upstream repositories, exact
 remote `main` commits, Git author attribution, file hashes, modes, and exclusions.
@@ -104,14 +105,6 @@ the synthetic runtime, and frontend startup.
 The public repository excludes organizer datasets, private work notes, administrative credentials, generated runtime state, and deployment secrets.
 
 The live application uses only team-generated synthetic banking data and simulated banking actions.
-
-The original frontend repository remains private while permission to redistribute
-organizer PDFs in its Git history is checked. Its code is publicly cloneable here
-without those PDFs or that history. This repository excludes organizer material,
-private work notes, credentials, generated runtime state, and organizer datasets.
-The backend's team-authored synthetic classifier corpus is included. The deployment
-link was supplied by its owner; presentation and public video links remain pending. See
-[known compatibility limitations](docs/evidence.md#known-integration-blocker).
 
 ## Architecture
 
