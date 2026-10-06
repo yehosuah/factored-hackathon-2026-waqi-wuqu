@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+__pycache__/
+*.tsbuildinfo
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+.vscode/*
+!.vscode/extensions.json
+data/
+tmp/

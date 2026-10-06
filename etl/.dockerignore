@@ -1,0 +1,11 @@
+**
+!pyproject.toml
+!uv.lock
+!README.md
+!docker/
+!docker/debian.sources
+!src/
+!src/factored_bank/
+!src/factored_bank/**
+**/* 2.py
+**/__pycache__/

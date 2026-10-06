@@ -1,0 +1,12 @@
+# Explicit opt-in: docker compose -f compose.yaml -f compose.ml.yaml ...
+services:
+  etl:
+    environment:
+      ETL_ML_ROOT: /ml-input
+    volumes:
+      - type: bind
+        source: ${ETL_ML_ROOT:?Set ETL_ML_ROOT to an existing host ML pack directory}
+        target: /ml-input
+        read_only: true
+        bind:
+          create_host_path: false

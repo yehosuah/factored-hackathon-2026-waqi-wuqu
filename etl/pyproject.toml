@@ -1,0 +1,69 @@
+[project]
+name = "factored-bank"
+version = "0.1.0"
+description = "Entorno ETL para los datos LATAM Bank de Factored Hackathon 2026"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "boto3>=1.40,<2",
+    "duckdb>=1.4,<2",
+    "polars>=1.30,<2",
+    "psycopg>=3.2,<4",
+    "pydantic>=2.11,<3",
+]
+
+[project.scripts]
+check-environment = "factored_bank.check_environment:main"
+factored-extract = "factored_bank.extract.cli:main"
+factored-etl = "factored_bank.etl.cli:main"
+factored-profile = "factored_bank.profile.cli:main"
+factored-demo-fixture = "factored_bank.demo.fixture:main"
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1", "psycopg[binary]>=3.2,<4"]
+native = ["psycopg[c]>=3.2,<4"]
+# Install before source builds; removed from the production environment afterward.
+build-tools = [
+    "Cython==3.3.0",
+    "setuptools==83.0.0",
+    "wheel==0.48.0",
+    "hatchling==1.32.4",
+    "packaging==26.3",
+    "pathspec==1.1.1",
+    "pluggy==1.6.0",
+    "trove-classifiers==2026.9.21.13",
+    "tomlkit==0.15.1",
+]
+notebooks = ["jupyterlab>=4,<5", "ipykernel>=6,<8"]
+
+[tool.uv]
+# Exact versions also reside in the hashed build-tools lock group.
+build-constraint-dependencies = [
+    "Cython==3.3.0",
+    "setuptools==83.0.0",
+    "wheel==0.48.0",
+    "hatchling==1.32.4",
+    "packaging==26.3",
+    "pathspec==1.1.1",
+    "pluggy==1.6.0",
+    "trove-classifiers==2026.9.21.13",
+    "tomlkit==0.15.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/factored_bank"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

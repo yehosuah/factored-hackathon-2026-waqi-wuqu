@@ -1,0 +1,133 @@
+{
+  "review_date_local": "2026-10-03",
+  "snapshot_utc": "2026-10-04T04:18:01Z",
+  "timezone": "America/Guatemala",
+  "authenticated_account": {
+    "login": "yehosuah",
+    "name": "Yehosua Hercules"
+  },
+  "scope": "ETL,backend,frontend review; no ML implementation; no application merges",
+  "open_pr_counts": {
+    "FactoredAI_base": 0,
+    "FactoredAI_BCK": 0,
+    "FactoredAI_FRT": 0
+  },
+  "remote_branch_heads": {
+    "FactoredAI_base": {
+      "main": "dbb32f542eb0eaa0f771c668a5791421a1fba326",
+      "andrew/ml-routing-evaluation": "de0d3eaed6cfeb8aa5c31545a9d160d5938c248d",
+      "yehosuah/hackathon-agent-sprint": "94ebbe54858f58ea94a3bfce628b01c9b17d77d9"
+    },
+    "FactoredAI_BCK": {
+      "main": "d6aa84a74277218bff70f8e74bfa3cac34ec06b9",
+      "yehosuah/card-support-integration": "e59182c9953ae4b7d33d1a7eb85f2e3f946d57f6",
+      "andrew/backend-observability": "bd2e74a929aa9445fd9368f80262c4d5bb3db4d9",
+      "andrew/backend-tools": "8328d74e5b523529842b098cf8248bb4cfe7e41c",
+      "andrew/human-handoff-routing": "fd40d2cb5a4fe6142aae776a3742f57ae8eebf9f"
+    },
+    "FactoredAI_FRT": {
+      "main": "95a1a43463fc3ceae007e4d36c9d3c9ce1432dab"
+    }
+  },
+  "branch_relationship": "backend-observability ancestor of backend-tools ancestor of human-handoff-routing",
+  "merged_prs": [
+    {
+      "repository": "FactoredAI_base",
+      "number": 1,
+      "merged_at": "2026-09-30T16:22:12Z",
+      "review_scope": "ETL pack consumer metadata only"
+    },
+    {
+      "repository": "FactoredAI_base",
+      "number": 2,
+      "merged_at": "2026-10-02T04:13:49Z"
+    },
+    {
+      "repository": "FactoredAI_BCK",
+      "number": 1,
+      "merged_at": "2026-10-02T04:11:16Z"
+    }
+  ],
+  "github_ci_signal": "zero check runs at four new code branch heads; zero status contexts at ETL and newest backend heads",
+  "checks": {
+    "etl": {
+      "passed": 187,
+      "skipped": 0,
+      "make_check": "pass",
+      "profiler": "offline accepted-release run pass; publication not_checked"
+    },
+    "backend_observability": {
+      "passed": 48,
+      "skipped": 7,
+      "lint_format": "pass explicit no-respect-gitignore"
+    },
+    "backend_tools": {
+      "passed": 112,
+      "skipped": 21,
+      "lint_format": "pass explicit no-respect-gitignore"
+    },
+    "backend_handoff_default": {
+      "passed": 172,
+      "skipped": 43,
+      "make_check": "pass"
+    },
+    "backend_handoff_postgres": {
+      "passed": 215,
+      "skipped": 0,
+      "postgres_version": "17.11",
+      "fixture_adaptation": "TCP disposable localhost database replaces local binary launcher only"
+    },
+    "additional_bug_probes": {
+      "postgres_passed": 2,
+      "controlled_adapter_probes": 1
+    },
+    "frontend": "npm run check pass"
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P1",
+      "title": "Accepted handoff lacks recovery after assigned account disabled",
+      "reproduced": true,
+      "packets": [
+        "P08",
+        "P10"
+      ]
+    },
+    {
+      "id": "R2",
+      "priority": "P2",
+      "title": "Terminal history precedes new active queue work",
+      "reproduced": true,
+      "packets": [
+        "P08"
+      ]
+    },
+    {
+      "id": "R3",
+      "priority": "P2",
+      "title": "Dispatcher verifies contradictory action state",
+      "reproduced": true,
+      "probe_type": "controlled Store adapter; not an observed real Store state error",
+      "packets": [
+        "P04",
+        "P05",
+        "P09"
+      ]
+    }
+  ],
+  "aggregate_profiler_evidence": {
+    "release_id": "a5ea7a8613c31883cf7c9173f0c541b12c49fd291f0d594432fc798d1c3bf5f4",
+    "card_transaction_rows": 1547408,
+    "recorded_card_declines": 77712,
+    "recorded_card_decline_rate": 0.05022076,
+    "accepted_transcripts": 143852,
+    "distinct_customer_texts": 42,
+    "distinct_full_texts": 546
+  },
+  "limitations": [
+    "No public or new integrated Compose acceptance performed",
+    "No ML quality assessment",
+    "Guide branch head is recorded before this update; subsequent documentation commits do not change reviewed code heads"
+  ]
+}

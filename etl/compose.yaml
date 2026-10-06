@@ -1,0 +1,89 @@
+name: factored-system
+services:
+  postgres:
+    image: postgres:17.11-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    entrypoint: [/bin/sh, /usr/local/bin/factored-pg-entrypoint.sh]
+    command: [postgres]
+    environment:
+      POSTGRES_USER: factored_admin
+      POSTGRES_DB: factored
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    secrets: [postgres_password, etl_password, backend_password]
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker/init-db.sh:/docker-entrypoint-initdb.d/10-roles.sh:ro
+      - ./docker/pg-entrypoint.sh:/usr/local/bin/factored-pg-entrypoint.sh:ro
+    tmpfs:
+      - /run/factored-secrets:mode=0700
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U factored_admin -d factored]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  etl:
+    build: .
+    user: "${ETL_UID:?Set ETL_UID to the non-root owner of ETL state}:${ETL_GID:?Set ETL_GID to the ETL state owner group}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,mode=1777
+    environment:
+      ETL_RAW_ROOT: /state/raw/organizer
+      ETL_EXTRACT_ROOT: /state/extract
+      ETL_OUTPUT_ROOT: /state/processed
+      ETL_DB_HOST: postgres
+      ETL_DB_PASSWORD_FILE: /run/secrets/etl_password
+      ETL_INTERVAL_SECONDS: "300"
+      ETL_OFFLINE: "${ETL_OFFLINE:-false}"
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/aws_credentials
+      AWS_CONFIG_FILE: /run/secrets/aws_config
+      AWS_PROFILE: "${AWS_PROFILE:-default}"
+      AWS_REGION: us-east-2
+      AWS_EC2_METADATA_DISABLED: "true"
+    secrets: [etl_password, aws_credentials, aws_config]
+    volumes:
+      - ./data/raw:/state/raw
+      - ./outputs/extract:/state/extract
+      - ./data/processed:/state/processed
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+  backend:
+    build: ./FactoredAI_BCK
+    user: "${ETL_UID:?Set ETL_UID to the non-root owner of runtime secrets}:${ETL_GID:?Set ETL_GID to the runtime secret owner group}"
+    ports:
+      - "127.0.0.1:${BCK_PORT:-8000}:8000"
+    environment:
+      BCK_DATA_ENABLED: "true"
+      BCK_DB_HOST: postgres
+      BCK_DB_PASSWORD_FILE: /run/secrets/backend_password
+      BCK_DEMO_PASSWORD_FILE: /run/secrets/demo_password
+    secrets: [backend_password, demo_password]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      start_period: 600s
+      interval: 10s
+      timeout: 3s
+      retries: 3
+volumes:
+  postgres-data:
+secrets:
+  postgres_password:
+    file: ./.secrets/postgres_password
+  etl_password:
+    file: ./.secrets/etl_password
+  backend_password:
+    file: ./.secrets/backend_password
+  demo_password:
+    file: ./.secrets/demo_password
+  aws_credentials:
+    file: ${ETL_AWS_CREDENTIALS_FILE:-./.secrets/aws_credentials}
+  aws_config:
+    file: ${ETL_AWS_CONFIG_FILE:-./.secrets/aws_config}

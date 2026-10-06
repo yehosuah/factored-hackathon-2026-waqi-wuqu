@@ -1,0 +1,60 @@
+{
+  "contract_id": "team-ml-review-v1",
+  "contract_version": "0.1.0-draft",
+  "status": "draft_for_review",
+  "artifact_kind": "portable_synthetic_review_pack",
+  "readiness": "draft_review_only",
+  "organizer_records_included": false,
+  "backend_executions_included": false,
+  "approved_policies_included": false,
+  "scored_evaluation_authorized": false,
+  "raw_release_reference": "624156a5cce033722fba62bd27fb2441227ca68395022c58aca1ce9bd3bb6be6",
+  "languages": [
+    "es",
+    "pt"
+  ],
+  "taxonomy_file": "taxonomy.json",
+  "datasets": {
+    "policies.jsonl": {
+      "grain": "one draft document version in one language",
+      "key": "document_id"
+    },
+    "intent_cases.jsonl": {
+      "grain": "one initial customer request",
+      "key": "example_id"
+    },
+    "retrieval_cases.jsonl": {
+      "grain": "one retrieval query with explicit context",
+      "key": "example_id"
+    },
+    "handoff_cases.jsonl": {
+      "grain": "one escalation case at an explicit sequence boundary",
+      "key": "example_id"
+    }
+  },
+  "constraints": [
+    "All annotations and translations require human review",
+    "Split assignments remain unset pending ML agreement",
+    "Paraphrases and translations in a leakage family are not independent samples",
+    "Raw reference is provenance context, not included raw data or a required local path",
+    "Required facts and forbidden claims in handoff fixtures are English annotations",
+    "Policy-state names are proposed simulator states, not organizer mappings"
+  ],
+  "pending_decisions": [
+    "Review of complete policy wording and effective-date semantics",
+    "Review of each label, relevance annotation and route target",
+    "Spanish and Portuguese language review",
+    "Independent held-out case authorship and coverage",
+    "Split strategy and metrics",
+    "Detailed action-result event contract and organizer transformation rules"
+  ],
+  "accepted_design_decisions": [
+    "Portable local first handoff",
+    "Ten starting routing categories",
+    "Synthetic Spanish and Portuguese policies/cases drafted for review",
+    "Temporary pause reversible; loss/theft block not automatically reversible",
+    "Initial activation requires PENDING_ACTIVATION in the fictional simulator",
+    "Replacement registration proves only that a request exists",
+    "Multiple intent labels; clarify ambiguity; prioritize loss/theft before other requests"
+  ]
+}

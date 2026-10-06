@@ -1,0 +1,16 @@
+# Generated environments, build outputs, and private local runtime files.
+**/.venv*/
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+**/.demo/
+**/.secrets/
+**/.scratch/
+**/GeneralInfo/
+**/.env
+**/.env.*
+!**/.env.example
+*.log
+.DS_Store

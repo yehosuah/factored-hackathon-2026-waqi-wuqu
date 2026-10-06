@@ -1,0 +1,161 @@
+{
+  "audit_date": "2026-10-03",
+  "timezone": "America/Guatemala",
+  "scope": "read-only engineering audit and sprint planning; no ML implementation",
+  "git_revisions": {
+    "etl": "e3db6a0d5977b0a7f64d012fcc80b7b894c89a19",
+    "backend": "e59182c9953ae4b7d33d1a7eb85f2e3f946d57f6",
+    "frontend": "95a1a43463fc3ceae007e4d36c9d3c9ce1432dab"
+  },
+  "accepted_release_id": "a5ea7a8613c31883cf7c9173f0c541b12c49fd291f0d594432fc798d1c3bf5f4",
+  "raw_release_id": "624156a5cce033722fba62bd27fb2441227ca68395022c58aca1ce9bd3bb6be6",
+  "contract_version": "card-support-etl-v1",
+  "table_counts": {
+    "branches": {
+      "input": 350,
+      "accepted": 350,
+      "rejected": 0
+    },
+    "call_center_interactions": {
+      "input": 686296,
+      "accepted": 670427,
+      "rejected": 15869
+    },
+    "call_transcripts": {
+      "input": 171321,
+      "accepted": 143852,
+      "rejected": 27469
+    },
+    "complaints": {
+      "input": 67095,
+      "accepted": 22217,
+      "rejected": 44878
+    },
+    "customers": {
+      "input": 150000,
+      "accepted": 150000,
+      "rejected": 0
+    },
+    "products": {
+      "input": 400000,
+      "accepted": 399988,
+      "rejected": 12
+    },
+    "satisfaction_surveys": {
+      "input": 212759,
+      "accepted": 207958,
+      "rejected": 4801
+    },
+    "service_agents": {
+      "input": 1200,
+      "accepted": 1174,
+      "rejected": 26
+    },
+    "transactions": {
+      "input": 4425008,
+      "accepted": 4424802,
+      "rejected": 206
+    }
+  },
+  "aggregate_queries": {
+    "card_population": "SELECT count(*) AS card_products,count(DISTINCT customer_id) AS card_customers FROM products WHERE product_type IN ('Tarjeta Crédito','Tarjeta Débito')",
+    "contact_categories": "SELECT contact_reason,count(*) AS accepted_rows,count(was_resolved) AS observed_resolution_labels,count(*) FILTER(WHERE was_resolved) AS marked_resolved,count(duration_seconds) AS observed_duration FROM call_center_interactions GROUP BY contact_reason ORDER BY accepted_rows DESC",
+    "product_mention_attribution": "WITH mentions AS (SELECT customer_id,trim(unnest(string_split(mentioned_products,','))) AS product_id FROM call_center_interactions WHERE mentioned_products IS NOT NULL) SELECT count(*) AS mention_tokens,count(p.product_id) AS matched_products,count(*) FILTER(WHERE p.product_type IN ('Tarjeta Crédito','Tarjeta Débito')) AS matched_card_products,count(*) FILTER(WHERE p.customer_id=m.customer_id) AS owner_matching_mentions,count(*) FILTER(WHERE p.customer_id=m.customer_id AND p.product_type IN ('Tarjeta Crédito','Tarjeta Débito')) AS owner_matching_card_mentions FROM mentions m LEFT JOIN products p USING(product_id)"
+  },
+  "aggregate_results": {
+    "card_population": [
+      {
+        "card_products": 140040,
+        "card_customers": 91084
+      }
+    ],
+    "contact_categories": [
+      {
+        "contact_reason": "Transaccional",
+        "accepted_rows": 234574,
+        "observed_resolution_labels": 234574,
+        "marked_resolved": 214639,
+        "observed_duration": 201725
+      },
+      {
+        "contact_reason": "Producto",
+        "accepted_rows": 147285,
+        "observed_resolution_labels": 147285,
+        "marked_resolved": 132026,
+        "observed_duration": 126588
+      },
+      {
+        "contact_reason": "Queja",
+        "accepted_rows": 114335,
+        "observed_resolution_labels": 114335,
+        "marked_resolved": 49818,
+        "observed_duration": 98435
+      },
+      {
+        "contact_reason": "Técnico",
+        "accepted_rows": 100527,
+        "observed_resolution_labels": 100527,
+        "marked_resolved": 70280,
+        "observed_duration": 86442
+      },
+      {
+        "contact_reason": "Comercial",
+        "accepted_rows": 53611,
+        "observed_resolution_labels": 53611,
+        "marked_resolved": 34963,
+        "observed_duration": 45989
+      },
+      {
+        "contact_reason": "Retención",
+        "accepted_rows": 20095,
+        "observed_resolution_labels": 20095,
+        "marked_resolved": 12086,
+        "observed_duration": 17251
+      }
+    ],
+    "product_mention_attribution": [
+      {
+        "mention_tokens": 536046,
+        "matched_products": 3475,
+        "matched_card_products": 1197,
+        "owner_matching_mentions": 0,
+        "owner_matching_card_mentions": 0
+      }
+    ]
+  },
+  "grain_note": "Interaction rows are keyed by interaction_id + process_date; these are not automatically unique people or unique real incidents.",
+  "attribution_limit": "Exact product-mention attribution failed ownership validation; this does not establish absence of card demand.",
+  "quality_limit": "Rejection selection may bias retained-only complaint/transcript metrics. Branch relationships remain unresolved under the accepted ADR.",
+  "checks": {
+    "etl_make_check": "passed",
+    "etl_make_test": {
+      "passed": 207,
+      "duplicate_test_files": 5,
+      "byte_identical_duplicates": true,
+      "canonical_collected_cases": 107
+    },
+    "backend_make_check": {
+      "status": "passed",
+      "tests": 22
+    },
+    "frontend_npm_ci_offline": "passed",
+    "frontend_npm_run_check": "passed",
+    "etl_runtime_files_compared_with_base_checkout": {
+      "files": 30,
+      "different": 0,
+      "missing": 0
+    },
+    "runtime_snapshot": {
+      "compose_running_services": 0,
+      "backend_port_8000": "connection refused"
+    },
+    "live_postgresql_restart_retested": false
+  },
+  "historical_system_verification": "docs/design/etl-system/verification.md; acceptance date 2026-10-01, offline mode",
+  "live_s3": "explicitly deferred by user on 2026-10-01",
+  "sources": {
+    "problem_statement": "GeneralInfo/Factored AI & Data Hackathon 2026 (1).pdf, pages 2-6",
+    "kickoff": "GeneralInfo/Datathon_2026_Kickoff (1).pdf, pages 10-15,18,20"
+  },
+  "privacy": "Aggregate results and code/release identifiers only; no customer records, credentials, private model configuration or raw transcripts included."
+}

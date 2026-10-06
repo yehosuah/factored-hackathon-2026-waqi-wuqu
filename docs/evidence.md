@@ -40,6 +40,37 @@ and [code review](https://github.com/yehosuah/FactoredAI_base/pull/9#issuecommen
 These reviews and test counts are evidence of the evaluated scope, not a production
 certification.
 
+## Consolidated source validation
+
+The included remote-main snapshots were checked in the `etl/`, `backend/`, and
+`frontend/` layout on macOS with Python 3.13.14, Node.js 25.9.0, and local PostgreSQL
+18 tools. Original component bytes and dependency locks were preserved.
+
+| Check | Result |
+| --- | --- |
+| Source provenance | 257 files match the source manifest, including Git blob identities and executable modes |
+| Root installation | `make setup` passed with the three dependency locks |
+| ETL checks | Lint, format, environment checks and 378 tests passed |
+| Backend checks | Lint and format passed; 486 tests passed, one optional scikit-learn parity test skipped |
+| Frontend checks | 65 tests passed; ESLint, TypeScript and Vite build passed |
+| Frontend serving | Five configuration/local Nginx tests passed |
+| Startup and proxy | Fresh base API readiness, frontend startup and root-command `/api` proxy passed; owned processes stopped |
+| Compose layout | ETL/backend build contexts, bind sources and loopback API binding verified without starting containers |
+
+Backend tests used `PYTHONPATH=src` so the non-editable test environment could locate
+the included synthetic training corpus. Database tests used disposable local instances.
+The fresh base API probe had data access disabled; it did not test login or confirmed
+actions. A full Docker data/action runtime was not started for this consolidation check,
+and existing recording/runtime services were not changed. These checks do not extend
+the earlier 60-case regression to this different backend revision.
+
+The unchanged frontend lock pins the development dependency `source-map-js` 1.2.1.
+`npm audit` reports one high-severity advisory for malicious indexed source maps:
+[GHSA-68fv-2mgg-jv7q](https://github.com/advisories/GHSA-68fv-2mgg-jv7q).
+The project has released [patched version 1.2.2](https://github.com/7rulnik/source-map-js/releases/tag/v1.2.2).
+Dependency remediation remains an upstream follow-up; this source snapshot does not
+silently change the frontend's reviewed lock or claim a clean dependency audit.
+
 ## Publication audit
 
 Before publication, all reachable advertised Git refs and GitHub discussion/review
@@ -48,7 +79,9 @@ metadata of the component repositories were scanned with checksum-verified Gitle
 conversation identifiers in unit tests, not session credentials. The classifier corpus
 is marked `team_synthetic`; no organizer data files are included in this hub.
 
-The frontend stays private because four organizer PDFs remain in its Git history and
-public redistribution permission is unverified. Automated scans do not prove that every
-possible secret is absent. Raw audit exports and private evaluation records are retained
-locally and are not part of this public repository.
+The original frontend repository stays private because four organizer PDFs remain in
+its Git history and public redistribution permission is unverified. A clean frontend
+source snapshot is included under `frontend/` here without those PDFs or Git history.
+`source-manifest.json` identifies all three snapshots and every excluded file.
+Automated scans do not prove that every possible secret is absent. Raw audit exports
+and private evaluation records are retained locally and are not part of this public repository.

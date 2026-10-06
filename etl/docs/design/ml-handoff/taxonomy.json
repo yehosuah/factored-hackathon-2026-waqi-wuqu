@@ -1,0 +1,68 @@
+{
+  "taxonomy_id": "card-routing-v1",
+  "version": "0.1.0-draft",
+  "status": "accepted_starting_categories_pending_refinement",
+  "labels": [
+    {
+      "id": "block_lost_stolen",
+      "name_es": "Bloquear tarjeta perdida o robada",
+      "name_pt": "Bloquear cartão perdido ou roubado"
+    },
+    {
+      "id": "pause_card",
+      "name_es": "Pausar tarjeta temporalmente",
+      "name_pt": "Pausar cartão temporariamente"
+    },
+    {
+      "id": "reactivate_card",
+      "name_es": "Reactivar tarjeta pausada",
+      "name_pt": "Reativar cartão pausado"
+    },
+    {
+      "id": "activate_card",
+      "name_es": "Activar tarjeta nueva",
+      "name_pt": "Ativar cartão novo"
+    },
+    {
+      "id": "request_replacement",
+      "name_es": "Solicitar reemplazo",
+      "name_pt": "Solicitar substituição"
+    },
+    {
+      "id": "query_card_status",
+      "name_es": "Consultar estado de tarjeta",
+      "name_pt": "Consultar estado do cartão"
+    },
+    {
+      "id": "query_balance_limit",
+      "name_es": "Consultar saldo o límite",
+      "name_pt": "Consultar saldo ou limite"
+    },
+    {
+      "id": "query_movements",
+      "name_es": "Consultar movimientos",
+      "name_pt": "Consultar movimentações"
+    },
+    {
+      "id": "register_unrecognized_charge",
+      "name_es": "Registrar cargo no reconocido",
+      "name_pt": "Registrar cobrança não reconhecida"
+    },
+    {
+      "id": "unsupported_unclear",
+      "name_es": "Fuera de alcance o poco claro",
+      "name_pt": "Fora do escopo ou pouco claro"
+    }
+  ],
+  "open_decisions": [
+    "Whether balance and limit require separate labels",
+    "Review of individual annotations and route targets",
+    "Experiment split constraints and metrics"
+  ],
+  "accepted_routing_rule": {
+    "classification": "multiple_intent_labels",
+    "ambiguous_request": "clarify_before_selecting_an_action",
+    "priority": "loss_theft_before_other_requests",
+    "authorization_and_eligibility": "outside_request_classification"
+  }
+}

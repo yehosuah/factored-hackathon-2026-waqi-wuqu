@@ -1,0 +1,39 @@
+.DS_Store
+/.secrets/
+/.idea/
+# Independent checkouts and local working notes are not ETL source.
+/FactoredAI_BCK/
+/FactoredAI_base/
+/.scratch/
+# Organizer PDFs and generated design exports remain local reference material.
+/GeneralInfo/
+/docs/design/extract-card-support/contenido.json
+/docs/design/extract-card-support/*.docx
+/docs/design/extract-card-support/diagrams/
+/docs/design/extract-card-support/README.md
+/docs/adr/README.md
+/.venv*
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.env
+.env.*
+!.env.example
+/data/**
+!/data/README.md
+!/data/fixtures/
+!/data/fixtures/README.md
+/outputs/**
+!/outputs/README.md
+*.duckdb
+*.duckdb.wal
+
+# Isolated synthetic demo state and generated private credentials.
+/.demo/
