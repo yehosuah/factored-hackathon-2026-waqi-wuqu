@@ -92,16 +92,18 @@ make check
 See [root setup instructions](docs/setup.md) for prerequisites, database tests,
 the synthetic runtime, and frontend startup.
 
-## Submission links
+## Submission Links
 
 | Deliverable | Link / status |
 | --- | --- |
-| ETL source | [Included here](etl/); [original repository](https://github.com/yehosuah/FactoredAI_base) |
-| Backend source | [Included here](backend/); [original repository](https://github.com/yehosuah/FactoredAI_BCK) |
-| Frontend source | [Included here](frontend/); original `FactoredAI_FRT` remains private |
-| Working deployment | [Waqi'wuqu](https://factored-ai.163-192-145-116.sslip.io/#chat) |
-| Presentation, 4–6 slides | Pending link |
-| Demo video, at most 3 minutes | MP4 delivered in chat using the tested local candidate; public URL pending |
+| Public repository | [factored-hackathon-2026-waqi-wuqu](https://github.com/yehosuah/factored-hackathon-2026-waqi-wuqu) |
+| Working deployment | [Waqi'wuqu Live Demo](https://factored-ai.163-192-145-116.sslip.io/) |
+| Presentation, 4–6 slides | Included with the hackathon submission |
+| Demo video, under 3 minutes | [YouTube](https://youtube.com/watch?v=WtR6R8uWQwY&feature=youtu.be) |
+
+The public repository excludes organizer datasets, private work notes, administrative credentials, generated runtime state, and deployment secrets.
+
+The live application uses only team-generated synthetic banking data and simulated banking actions.
 
 The original frontend repository remains private while permission to redistribute
 organizer PDFs in its Git history is checked. Its code is publicly cloneable here
@@ -135,7 +137,3 @@ is connected by the synthetic demo.
 - [Validation evidence and limits](docs/evidence.md): exact revisions, regression results, and unpublished dependencies.
 - [ETL runtime guide](https://github.com/yehosuah/FactoredAI_base/blob/main/docs/demo-runtime.md).
 - [System evaluation contract](https://github.com/yehosuah/FactoredAI_base/blob/main/docs/system-evaluation.md).
-
-The reported integrated regression used a **local, unpublished backend candidate**.
-It cannot be reproduced by cloning backend `main`. Public backend `main` is a different
-revision and needs its own integrated validation. This hub does not publish that candidate.
