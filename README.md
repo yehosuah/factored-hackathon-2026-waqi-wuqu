@@ -75,8 +75,8 @@ and documentation:
 | Directory | Source revision | Files |
 | --- | --- | ---: |
 | [etl/](etl/) | `c222173ee03df46be914cbfacfb097823f6a7196` | 114 |
-| [backend/](backend/) | `3a087a3100f8b7f4cfc1a61a95277fd13bf44612` | 100 |
-| [frontend/](frontend/) | `8ab2eb5e0363046150c49e8b290bebd2d47d81f5` | 43 |
+| [backend/](backend/) | `1e0321dc2c01ad5b4834183466b43f4563be18e4` | 100 |
+| [frontend/](frontend/) | `15c50c903073a437ec7af3130311a9dec33c1605` | 43 |
 
 [source-manifest.json](source-manifest.json) records upstream repositories, exact
 remote `main` commits, Git author attribution, file hashes, modes, and exclusions.
