@@ -3,6 +3,30 @@
 Snapshot: 2026-10-06 UTC. This is a synthetic engineering regression, not an untouched
 acceptance set or a production safety estimate.
 
+## Known integration blocker
+
+**The currently published snapshots are not end-to-end compatible.** Frontend
+`frontend/src/demo.ts` sends `selected_product_id` on every chat turn, including `null`.
+The included backend's strict `SubmitTurn` contract lacks that field. Schema probes
+with both `null` and a selected synthetic card fail with `extra_forbidden`; enabled
+chat requests may therefore return HTTP 422. This is a confirmed contract mismatch,
+not merely an untested behavior. Component tests, base readiness, and proxy startup
+do not validate the complete product.
+
+[Backend PR #7](https://github.com/yehosuah/FactoredAI_BCK/pull/7) tracks integration.
+Its current published head is `bed5452e7fad96f4bc79e1c476ff2ab912f19ac1` and already
+includes the missing `selected_product_id` contract field, but the PR is unmerged.
+The tested local candidate includes further reviewed fixes whose publication remains
+pending. That complete candidate is not this source snapshot or the PR's current head.
+Frontend behavior has not been
+silently reduced to accommodate the older backend.
+
+The video MP4 delivered in chat uses the tested local candidate. It is evidence of
+that local runtime, not proof that cloning this public snapshot reproduces the
+recorded flow. A public video URL is still pending.
+
+## Earlier local candidate regression
+
 | Evidence | Result / provenance |
 | --- | --- |
 | ETL release | [PR #9](https://github.com/yehosuah/FactoredAI_base/pull/9), normal merge `c222173ee03df46be914cbfacfb097823f6a7196` |

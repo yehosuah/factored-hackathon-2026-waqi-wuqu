@@ -1,5 +1,16 @@
 # Waqi'wuqu — Factored AI & Data Hackathon 2026
 
+> **Known integration blocker: the published snapshots are not end-to-end compatible.**
+> The included frontend sends `selected_product_id` with every chat turn, including
+> `null`. The included backend `main` rejects that field, so chat may return HTTP 422.
+> `make setup` and `make check` install and check components; they do not establish a
+> working complete product. Backend integration is tracked in
+> [PR #7](https://github.com/yehosuah/FactoredAI_BCK/pull/7), whose published head adds
+> the missing field but is unmerged. The tested local candidate includes further
+> reviewed fixes whose publication remains pending; that candidate is not included here.
+> The video delivered in chat uses the tested local candidate. It does not demonstrate
+> end-to-end compatibility of these published snapshots.
+
 Spanish and Portuguese card-support demo: a traceable ETL, an authenticated backend
 with a local intent classifier, and a customer/agent interface. Customer actions are
 simulated, require explicit confirmation, and are verified against persisted evidence.
@@ -40,14 +51,15 @@ the synthetic runtime, and frontend startup.
 | Frontend source | [Included here](frontend/); original `FactoredAI_FRT` remains private |
 | Working deployment | Pending URL from the deployment owner |
 | Presentation, 4–6 slides | Pending link |
-| Demo video, at most 3 minutes | Pending link |
+| Demo video, at most 3 minutes | MP4 delivered in chat using the tested local candidate; public URL pending |
 
 The original frontend repository remains private while permission to redistribute
 organizer PDFs in its Git history is checked. Its code is publicly cloneable here
 without those PDFs or that history. This repository excludes organizer material,
 private work notes, credentials, generated runtime state, and organizer datasets.
 The backend's team-authored synthetic classifier corpus is included. The deployment,
-presentation, and video links remain pending.
+presentation, and public video links remain pending. See
+[known compatibility limitations](docs/evidence.md#known-integration-blocker).
 
 ## Architecture
 

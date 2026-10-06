@@ -1,5 +1,13 @@
 # Consolidated source and local setup
 
+> **The current published source snapshots are not end-to-end compatible.** The
+> frontend's chat payload includes `selected_product_id`, even when `null`, and backend
+> `main` rejects it; chat may return HTTP 422. The commands below install/check the
+> source and support local startup diagnosis. They do not provide a verified working
+> complete product. [Backend PR #7](https://github.com/yehosuah/FactoredAI_BCK/pull/7)
+> contains the unmerged contract addition. Publication of further reviewed fixes in
+> the tested local candidate remains pending.
+
 All three component source trees are included. No separate private repository clone
 or submodule initialization is required. Requirements: Git, `make`, `uv`, Node.js
 24 or newer, and npm. Python 3.13.14 is managed by each locked Python environment.
@@ -39,7 +47,13 @@ cd backend
 PYTHONPATH=src uv run --locked --group ml --no-editable pytest tests/test_intent_model.py
 ```
 
-## Run the synthetic API and frontend
+## Local synthetic startup for diagnosis
+
+The frontend keeps its selected-card functionality unchanged. Its current chat payload
+requires the backend contract addition in unmerged PR #7, which is absent from this
+snapshot. The tested local candidate includes additional reviewed fixes that remain
+unpublished. Full Docker data/login/action startup was not validated for this layout.
+Starting the services or passing readiness does not resolve the chat incompatibility.
 
 Read [etl/docs/demo-runtime.md](../etl/docs/demo-runtime.md), then start an isolated
 project from the repository root:
@@ -83,7 +97,9 @@ DEMO_CONVERSATION_ADAPTER=classifier make demo-up
 Verify the effective adapter using the runtime guide; neither mode connects to a real
 bank or payment system. The current included backend is remote `main`, not the
 unpublished candidate used for the reported 60-case regression. Its integration
-capability and validation limits are recorded in [evidence.md](evidence.md).
+capability and validation limits are recorded in [evidence.md](evidence.md). The MP4
+delivered in chat was recorded using the tested local candidate; reproducing that
+recording requires source that has not been published.
 
 ## Snapshot layout notes
 
