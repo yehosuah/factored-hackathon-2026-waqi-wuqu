@@ -1568,8 +1568,8 @@
     "frontend": {
       "repository": "https://github.com/yehosuah/FactoredAI_FRT",
       "source_ref": "refs/heads/main",
-      "source_commit": "24d08564c7e20da18e12b4563cdf36a494143f1d",
-      "source_tree": "1e2b70e82d6beb65d0ac92ed58b9e4ae08e55703",
+      "source_commit": "15c50c903073a437ec7af3130311a9dec33c1605",
+      "source_tree": "8a8ee6236f64ca27e2156e1d528001f8e5c28f07",
       "files": [
         {
           "path": ".editorconfig",
@@ -1699,10 +1699,10 @@
         },
         {
           "path": "package-lock.json",
-          "git_blob": "4ce003757b1595a8ff040f0b21ad92ebb9fd0fda",
+          "git_blob": "564ec71c8fde4bd2215a836e27945aec192f434e",
           "mode": "100644",
           "bytes": 95179,
-          "sha256": "55bc8dddc4da7fc416f3a91b7812b2e4bcb86ab137f59beea84e0bc2a25f1423"
+          "sha256": "71b80a01736b3358aaaeafc628c43fb45d66c910ecde814af3cea577114452fc"
         },
         {
           "path": "package.json",
@@ -1903,6 +1903,10 @@
           "reason": "Private work/developer artifact"
         },
         {
+          "path": ".scratch/source-map-js-security/issues/01-patched-source-map-js.md",
+          "reason": "Private work/developer artifact"
+        },
+        {
           "path": "GeneralInfo/Datathon_2026_Kickoff (1).pdf",
           "reason": "Organizer material"
         },
@@ -1927,10 +1931,11 @@
         },
         {
           "recorded_author_name": "Yehosua Hercules",
-          "commit_count": 35
+          "commit_count": 37
         }
       ],
       "file_count": 43
     }
-  }
+  },
+  "last_refreshed_at_utc": "2026-10-06T04:13:55.054573+00:00"
 }

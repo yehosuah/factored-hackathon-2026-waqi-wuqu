@@ -88,12 +88,18 @@ actions. A full Docker data/action runtime was not started for this consolidatio
 and existing recording/runtime services were not changed. These checks do not extend
 the earlier 60-case regression to this different backend revision.
 
-The unchanged frontend lock pins the development dependency `source-map-js` 1.2.1.
-`npm audit` reports one high-severity advisory for malicious indexed source maps:
-[GHSA-68fv-2mgg-jv7q](https://github.com/advisories/GHSA-68fv-2mgg-jv7q).
-The project has released [patched version 1.2.2](https://github.com/7rulnik/source-map-js/releases/tag/v1.2.2).
-Dependency remediation remains an upstream follow-up; this source snapshot does not
-silently change the frontend's reviewed lock or claim a clean dependency audit.
+The earlier frontend snapshot pinned development dependency `source-map-js` 1.2.1,
+which had [GHSA-68fv-2mgg-jv7q](https://github.com/advisories/GHSA-68fv-2mgg-jv7q).
+The frontend owner fixed the lock in
+[PR #4](https://github.com/yehosuah/FactoredAI_FRT/pull/4), merged as
+`15c50c903073a437ec7af3130311a9dec33c1605`. This hub now contains that exact merged
+source tree, matching reviewed head `5f37c8b24278aa9f3259109d5df59e1e8a0aefc3`.
+It pins [patched version 1.2.2](https://github.com/7rulnik/source-map-js/releases/tag/v1.2.2).
+The exact-head [security review](https://github.com/yehosuah/FactoredAI_FRT/pull/4#issuecomment-6009076784)
+reported no major issues. No frontend behavior was changed by the snapshot refresh.
+Frontend tests, lint, TypeScript/build, and the dependency audit were rerun for the
+refreshed lock; the audit reported zero vulnerabilities. ETL and backend source pins
+remain unchanged, including the documented chat incompatibility.
 
 ## Publication audit
 

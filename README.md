@@ -25,7 +25,7 @@ and documentation:
 | --- | --- | ---: |
 | [etl/](etl/) | `c222173ee03df46be914cbfacfb097823f6a7196` | 114 |
 | [backend/](backend/) | `1e0321dc2c01ad5b4834183466b43f4563be18e4` | 100 |
-| [frontend/](frontend/) | `24d08564c7e20da18e12b4563cdf36a494143f1d` | 43 |
+| [frontend/](frontend/) | `15c50c903073a437ec7af3130311a9dec33c1605` | 43 |
 
 [source-manifest.json](source-manifest.json) records upstream repositories, exact
 remote `main` commits, Git author attribution, file hashes, modes, and exclusions.
@@ -57,8 +57,8 @@ The original frontend repository remains private while permission to redistribut
 organizer PDFs in its Git history is checked. Its code is publicly cloneable here
 without those PDFs or that history. This repository excludes organizer material,
 private work notes, credentials, generated runtime state, and organizer datasets.
-The backend's team-authored synthetic classifier corpus is included. The deployment,
-presentation, and public video links remain pending. See
+The backend's team-authored synthetic classifier corpus is included. The deployment
+link was supplied by its owner; presentation and public video links remain pending. See
 [known compatibility limitations](docs/evidence.md#known-integration-blocker).
 
 ## Architecture
