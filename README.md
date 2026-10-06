@@ -49,7 +49,7 @@ the synthetic runtime, and frontend startup.
 | ETL source | [Included here](etl/); [original repository](https://github.com/yehosuah/FactoredAI_base) |
 | Backend source | [Included here](backend/); [original repository](https://github.com/yehosuah/FactoredAI_BCK) |
 | Frontend source | [Included here](frontend/); original `FactoredAI_FRT` remains private |
-| Working deployment | Pending URL from the deployment owner |
+| Working deployment | [Pending URL from the deployment owner](https://factored-ai.163-192-145-116.sslip.io/#chat) |
 | Presentation, 4–6 slides | Pending link |
 | Demo video, at most 3 minutes | MP4 delivered in chat using the tested local candidate; public URL pending |
 
