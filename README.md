@@ -1,21 +1,71 @@
 # Waqi'wuqu — Factored AI & Data Hackathon 2026
 
-> **Known integration blocker: the published snapshots are not end-to-end compatible.**
-> The included frontend sends `selected_product_id` with every chat turn, including
-> `null`. The included backend `main` rejects that field, so chat may return HTTP 422.
-> `make setup` and `make check` install and check components; they do not establish a
-> working complete product. Backend integration is tracked in
-> [PR #7](https://github.com/yehosuah/FactoredAI_BCK/pull/7), whose published head adds
-> the missing field but is unmerged. The tested local candidate includes further
-> reviewed fixes whose publication remains pending; that candidate is not included here.
-> The video delivered in chat uses the tested local candidate. It does not demonstrate
-> end-to-end compatibility of these published snapshots.
+Waqi'wuqu is an AI-first banking customer-support prototype built for the **Factored AI & Data Hackathon 2026**.
 
-Spanish and Portuguese card-support demo: a traceable ETL, an authenticated backend
-with a local intent classifier, and a customer/agent interface. Customer actions are
-simulated, require explicit confirmation, and are verified against persisted evidence.
-Human escalation has separate queued, assigned, accepted, and resolved states.
+The system provides authenticated card support in **Spanish and Portuguese**, combines a local intent classifier with deterministic banking tools, requires explicit confirmation before sensitive actions, verifies outcomes against persisted evidence, and escalates customers to a human agent when automation is not appropriate.
 
+## Live Demo
+
+**Application:**  
+https://factored-ai.163-192-145-116.sslip.io/
+
+### Public Demo Credentials
+
+#### Customer
+
+- Username: `demo`
+- Password: `Mp3DT6H9ZuF8Q41H2ldF5MSUJ1VrJPPWmjtNmDOD-wY`
+
+#### Human Agent
+
+- Username: `demo-agent`
+- Password: `oqR3IQku_Mv7EpJ465KSbNHA8zR9orWyW4lFmCjdVto`
+
+These credentials provide access only to the synthetic hackathon demo environment.  
+No real customer, banking, payment, or production data is used.
+
+## What the Demo Supports
+
+The customer experience includes:
+
+- Authenticated customer sessions
+- Card and movement consultation
+- Spanish and Portuguese support conversations
+- Local intent classification
+- Explicit card selection and context
+- Simulated card actions
+- Separate confirmation before sensitive actions
+- Verified execution receipts
+- Unrecognized-charge workflows
+- Explicit human escalation from the chat
+- Persistent conversations and handoffs across reconnects
+
+The human-agent experience includes:
+
+- Independent agent authentication
+- Assigned customer handoffs
+- Case acceptance
+- Case resolution
+- Persisted handoff state visible to the customer
+
+The demo never performs real banking operations. Card actions and case handling operate only against team-generated synthetic data.
+
+## Safety and Control Model
+
+The model does not directly execute banking actions.
+
+Instead, the application separates language understanding from deterministic execution:
+
+1. The local classifier interprets the customer request.
+2. The backend validates authenticated customer and card context.
+3. Read-only tools retrieve permitted information.
+4. Mutating actions create a pending server-owned confirmation.
+5. The customer must explicitly confirm the action separately.
+6. The backend revalidates authorization and state before execution.
+7. Only persisted execution evidence produces a verified receipt.
+8. Unsupported, ambiguous, or human-requested cases are escalated instead of guessed.
+
+Explicit requests for a human agent use a deterministic handoff API and do not depend on intent classification.
 ## Source in this repository
 
 One clone includes the actual component code, tests, dependency locks, build files,
